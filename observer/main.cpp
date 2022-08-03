@@ -18,9 +18,9 @@ template <class T>
 class IObserver
 {
 public:
-    void onNext(T item)
+    void onNext(int value)
     {
-        std::cout << item.ExprKind;
+        std::cout << value;
     }
     void onCompleted(double result)
     {
@@ -39,7 +39,7 @@ public:
     {
         this->list = list;
     }
-    void Subscribe(IObserver<T> *i)
+    void Subscribe(IObserver<T> *observer)
     {
         std::stack<double> EvalStack;
 
@@ -75,14 +75,13 @@ public:
                 }
             }
         }
-
-        std::cout << EvalStack.top();
+        observer->onCompleted(EvalStack.top());
     }
 };
 
-int main()
+int main(int argc, char * argv[])
 {
-    Lexer lex("2+33*2");
+    Lexer lex(argv[1]);
     std::vector<Token> tokens = lex.Analyze();
     RDParser *parser = new RDParser(tokens);
     Expression *exp = parser->doParse();
