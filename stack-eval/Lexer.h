@@ -1,4 +1,7 @@
+#pragma once
+
 #include <iostream>
+#include <vector>
 
 enum class TokenType
 {
@@ -7,22 +10,22 @@ enum class TokenType
     DIV,
     MULT,
     DOUBLE,
-    ILLEGAL
+    ILLEGAL,
+    TOK_NULL
 };
 
 struct Token
 {
     TokenType tok;
-    int DoubleValue;
+    double DoubleValue;
 };
 
 class Lexer
 {
 private:
     std::string str;
-    int index;
 
 public:
     Lexer(std::string str);
-    Token GetToken();
+    std::vector<Token> Analyze();
 };
