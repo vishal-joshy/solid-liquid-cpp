@@ -21,17 +21,12 @@ void BSort(T *arr, int length, std::function<bool(int, int)> comparator)
     }
 }
 
-
 int main()
 {
     int arr[5] = {5, 3, 2, 4, 1};
 
-    std::function foo = [](int a, int b)
-    {
-        return a > b;
-    };
-
-    BSort(arr, 5, foo);
+    BSort(arr, 5, [](int a, int b)
+          { return a > b; });
 
     for (int i : arr)
     {

@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <exception>
+#include <string>
 
-std::vector<int> BSort(std::vector<int> arr, int length)
+void BSort(std::vector<int> &arr, int length)
 {
     int temp;
     for (int i = 0; i < length; i++)
@@ -16,17 +18,40 @@ std::vector<int> BSort(std::vector<int> arr, int length)
             }
         }
     }
-    return arr;
 }
 
-int main()
+void helpMessage()
 {
-    std::vector<int> arr = {5, 3, 2, 4, 1};
+    std::cout << "Invalid argument size : use <filename> <array>" << std::endl;
+}
 
-    std::vector sorted = BSort(arr, 5);
-
-    for (int i : sorted)
+std::vector<int> getArray(int argc, char **argv)
+{
+    std::vector<int> temp;
+    for (int i = 1; i < argc; i++)
     {
-        std::cout << i;
+        temp.push_back((int)std::stoi(argv[i]));
     }
+    return temp;
+}
+
+int main(int argc, char **argv)
+{
+    if (argc < 2)
+    {
+        helpMessage();
+        return -1;
+    }
+
+    std::vector<int> arr = getArray(argc, argv);
+
+    BSort(arr, argc - 1);
+
+    std::cout << "sorted array :";
+
+    for (int i : arr)
+    {
+        std::cout << i << " ";
+    }
+    return 0;
 }
