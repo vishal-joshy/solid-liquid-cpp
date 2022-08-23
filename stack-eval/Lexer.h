@@ -26,6 +26,6 @@ private:
     std::string str;
 
 public:
-    Lexer(std::string str);
+    Lexer(const std::string &str);
     std::vector<Token> Analyze();
 };

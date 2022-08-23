@@ -9,7 +9,7 @@ bool isNumber(char c)
     return std::isdigit(static_cast<unsigned char>(c));
 }
 
-Lexer::Lexer(std::string str)
+Lexer::Lexer(const std::string &str)
 {
     this->str = str;
 }
